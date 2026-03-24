@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#0F1F3D" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="AutoRise ROI" />
+  <meta name="description" content="Calculate your automation ROI with AutoRise. See exactly how much you'll save." />
+  <title>ROI Calculator — AutoRise</title>
+  <link rel="manifest" href="./manifest.json" />
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+
+  <!-- ── Header ── -->
+  <header class="header">
+    <div class="header-brand">
+      <div class="logo-mark">AR</div>
+      <div class="brand-text">
+        <span class="brand-name">AutoRise</span>
+        <span class="brand-sub">Authorize AutoRise</span>
+      </div>
+    </div>
+    <div class="header-badge">ROI Calculator</div>
+  </header>
+
+  <!-- ── Main ── -->
+  <main class="main">
+
+    <!-- Hero -->
+    <section class="hero">
+      <h1>What Is Manual Work<br>Actually Costing You?</h1>
+      <p>Enter your numbers below. We'll show you the exact dollar value of your inefficiency — and your return on automating it.</p>
+    </section>
+
+    <!-- Input Form -->
+    <form id="roiForm" novalidate>
+      <div class="card">
+        <div class="card-title">
+          <div class="icon">✦</div>
+          Your Business
+        </div>
+
+        <div class="form-group">
+          <label for="companyName">Company Name</label>
+          <input
+            type="text"
+            id="companyName"
+            placeholder="e.g. Acme Corp"
+            autocomplete="organization"
+            autocapitalize="words"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="employees">Employees Doing Manual Work</label>
+          <input
+            type="number"
+            id="employees"
+            placeholder="e.g. 5"
+            min="1"
+            inputmode="numeric"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="hoursPerWeek">Hours Per Week on Manual Tasks</label>
+          <input
+            type="number"
+            id="hoursPerWeek"
+            placeholder="e.g. 20"
+            min="1"
+            max="168"
+            inputmode="numeric"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="hourlyWage">Average Hourly Wage</label>
+          <div class="input-prefix">
+            <span>$</span>
+            <input
+              type="number"
+              id="hourlyWage"
+              placeholder="e.g. 25"
+              min="1"
+              inputmode="decimal"
+              required
+            />
+          </div>
+        </div>
+
+        <button type="submit" class="btn-calculate">Calculate My ROI →</button>
+      </div>
+    </form>
+
+    <!-- Results -->
+    <section id="results" class="results" aria-live="polite">
+
+      <!-- Client header -->
+      <div class="result-header">
+        <div class="client-label">Report for</div>
+        <div class="client-name" id="outClientName">—</div>
+      </div>
+
+      <!-- Waste stats -->
+      <div class="card">
+        <div class="card-title">
+          <div class="icon">⏱</div>
+          The Real Cost of Doing Nothing
+        </div>
+        <div class="stat-grid">
+          <div class="stat-card">
+            <div class="stat-label">Annual Hours Wasted</div>
+            <div class="stat-value" id="outHoursWasted">—</div>
+            <div class="stat-unit">hours / year</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Annual Cost of Manual Work</div>
+            <div class="stat-value" id="outAnnualCost">—</div>
+            <div class="stat-unit">per year</div>
+          </div>
+          <div class="stat-card highlight">
+            <div class="stat-label">Estimated Savings with AutoRise</div>
+            <div class="stat-value" id="outSavings">—</div>
+            <div class="stat-unit">70% efficiency gain applied</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ROI Bar -->
+      <div class="roi-bar-wrap">
+        <div class="roi-bar-label">
+          <span>Return on Investment</span>
+          <span class="roi-pct" id="roiPct">—</span>
+        </div>
+        <div class="roi-track">
+          <div class="roi-fill" id="roiFill"></div>
+        </div>
+        <div class="roi-sub" id="roiSubText"></div>
+      </div>
+
+      <!-- Payback period -->
+      <div class="payback-pill">
+        <div class="payback-icon">⚡</div>
+        <div class="payback-text">
+          <div class="payback-months" id="outPayback">—</div>
+          <div class="payback-desc">to pay back your $10,000 AutoRise investment</div>
+        </div>
+      </div>
+
+      <!-- ROI summary stat -->
+      <div class="card">
+        <div class="card-title">
+          <div class="icon">📈</div>
+          Your ROI Summary
+        </div>
+        <div class="stat-grid">
+          <div class="stat-card highlight">
+            <div class="stat-label">Total Return on $10K Investment</div>
+            <div class="stat-value" id="outROI">—</div>
+            <div class="stat-unit">first-year ROI</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CTA -->
+      <div class="cta-card">
+        <h3>Ready to Authorize AutoRise?</h3>
+        <p>These numbers are conservative. Most clients see results within the first 30 days.</p>
+        <button class="btn-cta" onclick="alert('Contact AutoRise to get started.')">Get Started Today</button>
+      </div>
+
+      <div class="disclaimer">
+        * Estimates based on 70% efficiency gain and $10,000 AutoRise investment. Actual results may vary based on workflow complexity.
+      </div>
+
+      <button id="resetBtn" class="btn-reset">← Start a New Calculation</button>
+
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    © 2025 AutoRise LLC · Authorize AutoRise
+  </footer>
+
+  <script src="./app.js"></script>
+</body>
+</html>
